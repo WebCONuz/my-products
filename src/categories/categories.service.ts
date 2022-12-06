@@ -26,4 +26,11 @@ export class CategoriesService {
       returning: true,
     });
   }
+
+  // Delete Category Service
+  async deleteCategory(id: number) {
+    return await this.categoryRepository.destroy({
+      where: { category_id: id },
+    });
+  }
 }
