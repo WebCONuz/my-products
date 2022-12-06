@@ -27,6 +27,12 @@ export class CategoriesController {
   }
 
   // Update Category Controller
+  @Get(':id')
+  getOne(@Param('id') id: number) {
+    return this.categoryService.getOne(id);
+  }
+
+  // Update Category Controller
   @Put(':id')
   update(
     @Param('id') id: number,

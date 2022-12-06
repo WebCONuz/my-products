@@ -19,6 +19,14 @@ export class CategoriesService {
     return await this.categoryRepository.findAll({ include: { all: true } });
   }
 
+  // Get All Categories Service
+  async getOne(id) {
+    return await this.categoryRepository.findAll({
+      where: { category_id: id },
+      include: { all: true },
+    });
+  }
+
   // Update Category Service
   async updateCategory(createCategoryDto: CreateCategoryDto, id: number) {
     return await this.categoryRepository.update(createCategoryDto, {
