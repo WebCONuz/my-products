@@ -35,4 +35,11 @@ export class SubCategoriesService {
       returning: true,
     });
   }
+
+  // Delete SubCategory Service
+  async deleteCategory(id: number) {
+    return await this.subCategoryRepository.destroy({
+      where: { sub_category_id: id },
+    });
+  }
 }
