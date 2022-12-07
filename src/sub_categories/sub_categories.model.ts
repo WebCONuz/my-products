@@ -33,6 +33,6 @@ export class SubCategory extends Model<SubCategory, SubCategoryCreationAttrs> {
   })
   sub_category_name: string;
 
-  @BelongsTo(() => Category)
-  category: Category[];
+  // @BelongsTo(() => Category)
+  // category: Category;
 }

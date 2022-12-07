@@ -3,6 +3,7 @@ import {
   Model,
   Column,
   DataType,
+  HasMany,
   // BelongsTo,
   // BelongsToMany,
 } from 'sequelize-typescript';
@@ -31,6 +32,6 @@ export class Category extends Model<Category, CategoryCreationAttrs> {
   // @BelongsToMany(() => Role, () => UserRole)
   // roles: Role[];
 
-  // @BelongsTo(() => SubCategory)
-  // subCategories: SubCategory[];
+  @HasMany(() => SubCategory)
+  subCategories: SubCategory[];
 }

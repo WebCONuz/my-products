@@ -28,8 +28,8 @@ export class CategoriesService {
   }
 
   // Update Category Service
-  async updateCategory(createCategoryDto: CreateCategoryDto, id: number) {
-    return await this.categoryRepository.update(createCategoryDto, {
+  async updateCategory(updateCategoryDto: CreateCategoryDto, id: number) {
+    return await this.categoryRepository.update(updateCategoryDto, {
       where: { category_id: id },
       returning: true,
     });

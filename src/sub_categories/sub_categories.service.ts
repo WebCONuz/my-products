@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { CreateSubCategory } from './dto/create-subcategory.dto';
+import { UpdateSubCategoryDto } from './dto/update-subcategory.dto';
 import { SubCategory } from './sub_categories.model';
 
 @Injectable()
@@ -19,11 +20,19 @@ export class SubCategoriesService {
     return this.subCategoryRepository.findAll({ include: { all: true } });
   }
 
-  // Get One SubCategory Controller
+  // Get One SubCategory Service
   async getOne(id: number) {
     return this.subCategoryRepository.findOne({
       where: { sub_category_id: id },
       include: { all: true },
+    });
+  }
+
+  // Update SubCategory Service
+  async update(id: number, updateSubCategoryDto: UpdateSubCategoryDto) {
+    return this.subCategoryRepository.update(updateSubCategoryDto, {
+      where: { sub_category_id: id },
+      returning: true,
     });
   }
 }

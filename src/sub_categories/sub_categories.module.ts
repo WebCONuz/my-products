@@ -6,7 +6,7 @@ import { SubCategory } from './sub_categories.model';
 import { SubCategoriesService } from './sub_categories.service';
 
 @Module({
-  imports: [SequelizeModule.forFeature([Category, SubCategory])],
+  imports: [SequelizeModule.forFeature([SubCategory, Category])],
   controllers: [SubCategoriesController],
   providers: [SubCategoriesService],
 })
