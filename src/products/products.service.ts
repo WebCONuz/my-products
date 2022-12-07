@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { SubCategory } from 'src/sub_categories/sub_categories.model';
 import { CreateProductDto } from './dto/create-product.dto';
 import { QueryDto } from './dto/query.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -9,6 +10,7 @@ import { Product } from './product.model';
 export class ProductsService {
   constructor(
     @InjectModel(Product) private productRepository: typeof Product,
+    @InjectModel(SubCategory) private subCategoryRepository: typeof SubCategory,
   ) {}
 
   // Add Product Service
@@ -18,6 +20,19 @@ export class ProductsService {
 
   // Get Products By Query Strings Service
   async getQueryProduct(queryObj: QueryDto) {
+    if (queryObj.categoryId) {
+      const subCategories = this.subCategoryRepository.findAll({
+        where: {
+          category_id: Number(queryObj.categoryId),
+        },
+        include: { all: true },
+      });
+      const arr = (await subCategories).map((item) => {
+        return [...item.products];
+      });
+
+      return arr.flat();
+    }
     if (queryObj.subCategoryId && queryObj.model) {
       return this.productRepository.findAll({
         where: {
