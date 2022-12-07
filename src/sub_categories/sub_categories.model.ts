@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   BelongsTo,
   Column,
@@ -17,6 +18,7 @@ interface SubCategoryCreationAttrs {
 
 @Table({ tableName: 'sub_categories' })
 export class SubCategory extends Model<SubCategory, SubCategoryCreationAttrs> {
+  @ApiProperty({ example: '1', description: 'Unikal ID' })
   @Column({
     type: DataType.INTEGER,
     unique: true,
@@ -25,18 +27,17 @@ export class SubCategory extends Model<SubCategory, SubCategoryCreationAttrs> {
   })
   sub_category_id: number;
 
+  @ApiProperty({ example: '1', description: 'Category Id' })
   @ForeignKey(() => Category)
   @Column({ type: DataType.INTEGER })
   category_id: number;
 
+  @ApiProperty({ example: 'smart phones', description: 'Name of sub category' })
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
   sub_category_name: string;
-
-  // @BelongsTo(() => Category)
-  // category: Category;
 
   @HasMany(() => Product)
   products: Product[];

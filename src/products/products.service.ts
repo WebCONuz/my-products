@@ -18,8 +18,6 @@ export class ProductsService {
 
   // Get Products By Query Strings Service
   async getQueryProduct(queryObj: QueryDto) {
-    console.log(queryObj.subCategoryId && queryObj.model);
-
     if (queryObj.subCategoryId && queryObj.model) {
       return this.productRepository.findAll({
         where: {
