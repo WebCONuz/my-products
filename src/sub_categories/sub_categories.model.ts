@@ -5,8 +5,10 @@ import {
   ForeignKey,
   Table,
   Model,
+  HasMany,
 } from 'sequelize-typescript';
 import { Category } from 'src/categories/categories.model';
+import { Product } from 'src/products/product.model';
 
 interface SubCategoryCreationAttrs {
   category_id: number;
@@ -35,4 +37,7 @@ export class SubCategory extends Model<SubCategory, SubCategoryCreationAttrs> {
 
   // @BelongsTo(() => Category)
   // category: Category;
+
+  @HasMany(() => Product)
+  products: Product[];
 }

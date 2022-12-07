@@ -1,23 +1,23 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 
-export class CreateProductDto {
-  @IsNotEmpty()
+export class UpdateProductDto {
+  @IsOptional()
   @IsNumber()
   readonly sub_category_id: number;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   readonly model: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   readonly product_name: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   readonly color: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
   readonly price: number;
 }
