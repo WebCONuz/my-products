@@ -3,8 +3,10 @@ import {
   Model,
   Column,
   DataType,
-  BelongsToMany,
+  // BelongsTo,
+  // BelongsToMany,
 } from 'sequelize-typescript';
+import { SubCategory } from 'src/sub_categories/sub_categories.model';
 
 interface CategoryCreationAttrs {
   category_name: string;
@@ -28,4 +30,7 @@ export class Category extends Model<Category, CategoryCreationAttrs> {
 
   // @BelongsToMany(() => Role, () => UserRole)
   // roles: Role[];
+
+  // @BelongsTo(() => SubCategory)
+  // subCategories: SubCategory[];
 }
