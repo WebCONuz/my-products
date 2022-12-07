@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { CreateProductDto } from './dto/create-product.dto';
+import { QueryDto } from './dto/query.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './product.model';
 
@@ -15,9 +16,35 @@ export class ProductsService {
     return await this.productRepository.create(createProductDto);
   }
 
-  // Get All Product Service
-  async getAll() {
-    return await this.productRepository.findAll({ include: { all: true } });
+  // Get Products By Query Strings Service
+  async getQueryProduct(queryObj: QueryDto) {
+    console.log(queryObj.subCategoryId && queryObj.model);
+
+    if (queryObj.subCategoryId && queryObj.model) {
+      return this.productRepository.findAll({
+        where: {
+          sub_category_id: Number(queryObj.subCategoryId),
+          model: queryObj.model,
+        },
+        include: { all: true },
+      });
+    } else if (queryObj.subCategoryId) {
+      return this.productRepository.findAll({
+        where: {
+          sub_category_id: Number(queryObj.subCategoryId),
+        },
+        include: { all: true },
+      });
+    } else if (queryObj.model) {
+      return this.productRepository.findAll({
+        where: {
+          model: queryObj.model,
+        },
+        include: { all: true },
+      });
+    }
+
+    return [];
   }
 
   // Get All Product Service
